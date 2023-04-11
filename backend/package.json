@@ -1,0 +1,13 @@
+{
+    "name": "desafio-mb",
+    "version": "0.0.1",
+    "description": "API para gerenciamento de pessoas físicas e jurídicas",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }
+  
