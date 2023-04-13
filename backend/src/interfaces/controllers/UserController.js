@@ -37,7 +37,7 @@ class UserController {
       res.status(200).json(users);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Erro ao listar registros" });
+      res.status(500).json({ message: "Error listing users" });
     }
   }
 }
