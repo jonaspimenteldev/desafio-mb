@@ -1,4 +1,7 @@
 import express from "express";
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "./swagger-output.json" assert { type: "json" };
+import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRoutes from "./src/interfaces/routes/UserRoutes.js";
@@ -9,7 +12,11 @@ const PORT = 3000;
 
 app.use(bodyParser.json());
 
+app.use(cors());
+
 app.use("/", userRoutes);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 mongoose
   .connect(

@@ -100,6 +100,15 @@ export default {
 
                     console.log(form);
 
+                    this.$axios
+                        .post("http://localhost:3000/registration", form)
+                        .then((res) => {
+                            console.log(res.data)
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
                 } else {
                     form = {
                         email: this.dados.email,
@@ -112,7 +121,16 @@ export default {
                             openingDate: this.dados.company.openingDate
                         }
                     }
-                    console.log(form);
+
+                    this.$axios
+                        .post("http://localhost:3000/registration", form)
+                        .then((res) => {
+                            console.log(res.data)
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
 
                 }
             }
