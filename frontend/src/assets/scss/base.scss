@@ -1,3 +1,6 @@
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 /* RESET */
 @import 'reset';
 
@@ -5,17 +8,36 @@
 @import 'form';
 
 :root{ 
-    --color-primary: rgb(255 153 0); 
+    --color-primary: rgb(255 153 0);
+    --base-input-height: 45px;
+    --base-border-radius: 8px;
     --height: 100vh;
     --width: 100%;
+    --gap-8: 8px;
+    --gap-12: 12px;
+    --gap-16: 16px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 375px;
+    
 }
 
 body {
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     width: var(--width);
     height: var(--height)
 }
+
+// input {
+//     height: var( --base-input-height)
+// }
+
+
 
 

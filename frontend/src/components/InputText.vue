@@ -1,7 +1,7 @@
 <template>
-  <div :id="name" class="mb-input">
-    <label class="mb-input__label" :for="label">{{ label }}</label>
-    <input :value="value" @input="$emit('input', $event.target.value)" />
+  <div :id="name" class="form-input">
+    <label class="form-input__label" :for="label">{{ label }}</label>
+    <input class="form-input__input" :value="value" @input="$emit('input', $event.target.value)" />
   </div>
 </template>
   

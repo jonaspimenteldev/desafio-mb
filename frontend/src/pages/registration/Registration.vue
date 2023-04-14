@@ -1,11 +1,13 @@
 <template>
   <div class="container">
-    <StepOne v-if="step === 1" :dados="dataStepOne" @next="next" />
-    <StepTwo v-if="step === 2" :dados="dataStepTwo" @next="next" @back="back" />
-    <StepThree v-if="step === 3" :dados="dataStepThree" @next="next" @back="back" />
-    <StepFour v-if="step === 4" :dados="dataStepFour" @next="next" @back="back" />
-    <StepFive v-if="step === 5" :dados="dataStepFive" @send="submit" @back="back" />
-    <button v-if="step > 1" @click="back">Back</button>
+    <form class="form">
+      <StepOne v-if="step === 1" :dados="dataStepOne" @next="next" />
+      <StepTwo v-if="step === 2" :dados="dataStepTwo" @next="next" @back="back" />
+      <StepThree v-if="step === 3" :dados="dataStepThree" @next="next" @back="back" />
+      <StepFour v-if="step === 4" :dados="dataStepFour" @next="next" @back="back" />
+      <StepFive v-if="step === 5" :dados="dataStepFive" @send="submit" @back="back" />
+      <button v-if="step > 1" @click="back">Back</button>
+    </form>
   </div>
 </template>
   

@@ -1,3 +1,28 @@
-input {
-    border: 1px solid red;
+/* RADIO */
+@import 'radio';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+
+  &-input {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-12);
+
+    &__input {
+      height: var(--base-input-height);
+      border-radius: var(--base-border-radius);
+      border: 1px solid black;
+    }
+  }
+
+  &-radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-8);
+  }
 }
+

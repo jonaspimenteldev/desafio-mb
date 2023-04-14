@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <label v-for="(option, index) in options" :key="index">
-      <input type="radio" :name="name" :value="option.value" @input="handleChange">
+  <div class="form-radio">
+    <label class="form-radio__label" v-for="(option, index) in options" :key="index">
+      <input class="form-radio__input" type="radio" :name="name" :value="option.value" @input="handleChange">
       {{ option.label }}
     </label>
   </div>
