@@ -1,5 +1,6 @@
 <template>
-    <InputText name="email" label="Sua Senha" v-model="dados.password" :error="error.password" />
+    <InputText name="password" label="Sua Senha" v-model="dados.password" :error="error.password" />
+
     <GroupButton>
         <Button label="Voltar" :outline="true" :half="true" @click.prevent="back" />
         <Button label="Continue" :half="true" @click.prevent="next" />
@@ -10,8 +11,6 @@
 import InputText from '../../../components/InputText.vue'
 import Button from '../../../components/Button.vue'
 import GroupButton from '../../../components/GroupButton.vue'
-
-
 
 export default {
     components: {
@@ -27,7 +26,6 @@ export default {
     },
     data() {
         return {
-            step: 4,
             error: {
                 password: '',
             },

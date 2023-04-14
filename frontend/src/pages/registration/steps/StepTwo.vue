@@ -14,10 +14,7 @@ import InputText from '../../../components/InputText.vue'
 import InputRadio from '../../../components/InputRadio.vue'
 import Button from '../../../components/Button.vue'
 import GroupButton from '../../../components/GroupButton.vue'
-import {
-  validateCpf,
-  validateMinimumSize,
-} from "../../../utils/helperValidate";
+import { validateCpf, validateMinimumSize, } from "../../../utils/validate";
 
 export default {
   components: {
@@ -43,13 +40,7 @@ export default {
   },
   data() {
     return {
-      step: 2,
-      error: {
-        name: '',
-        cpf: '',
-        birthDate: '',
-        phone: '',
-      },
+      error: {},
     }
   },
   emits: ['next', 'back', 'dados'],

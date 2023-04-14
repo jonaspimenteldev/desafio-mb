@@ -1,25 +1,27 @@
 <template>
+  <!-- <pre>  {{ steps }}</pre> -->
   <div class="container">
     <form class="form">
       <Header :currentStep="currentStep" :title="currentTitle()" />
-      <StepOne v-if="step === 1" :dados="dataStepOne" @next="next" />
-      <StepTwo v-if="step === 2" :dados="dataStepTwo" @next="next" @back="back" />
-      <StepThree v-if="step === 3" :dados="dataStepThree" @next="next" @back="back" />
-      <StepFour v-if="step === 4" :dados="dataStepFour" @next="next" @back="back" />
-      <StepFive v-if="step === 5" :dados="dataStepFive" :registrationType="this.dataStepOne.registrationType"
-        @send="submit" @back="back" />
+      <StepOne v-if="step === 1" :dados="user" @next="next" />
+      <StepTwo v-if="step === 2" :dados="user" @next="next" @back="back" />
+      <StepThree v-if="step === 3" :dados="user" @next="next" @back="back" />
+      <StepFour v-if="step === 4" :dados="user" @next="next" @back="back" />
+      <Resume v-if="step === 5" :dados="user" @back="back" />
     </form>
-    {{ groupdata }}
   </div>
 </template>
-  
 <script>
+import { mapState, mapWritableState } from 'pinia'
+import { useRegistrationStore } from '../../store/registration'
+
+/* Components */
 import Header from '../../components/Header.vue'
-import StepOne from './partials/Step01.vue'
-import StepTwo from './partials/Step02.vue'
-import StepThree from './partials/Step03.vue'
-import StepFour from './partials/Step04.vue'
-import StepFive from './partials/Step05.vue'
+import StepOne from './steps/StepOne.vue'
+import StepTwo from './steps/StepTwo.vue'
+import StepThree from './steps/StepThree.vue'
+import StepFour from './steps/StepFour.vue'
+import Resume from './steps/StepFive.vue'
 
 export default {
   components: {
@@ -28,48 +30,30 @@ export default {
     StepTwo,
     StepThree,
     StepFour,
-    StepFive,
+    Resume,
   },
   computed: {
+    ...mapState(useRegistrationStore, ['steps']),
+
+    ...mapWritableState(useRegistrationStore, ['user']),
+
     currentStep() {
       if (this.step === 2 || this.step === 3) return 2
       if (this.step === 4) return 3
+      if (this.step === 5) return 4
       if (this.step) return this.step
     },
-    createSubmitForm() {
-      if (this.dataStepOne.registrationType === 'PF') {
-        return this.form = {
-          ...this.dataStepOne,
-          ...this.dataStepTwo,
-          ...this.dataStepFour,
-        }
-      } else {
-        return this.form = {
-          ...this.dataStepOne,
-          ...this.dataStepThree,
-          ...this.dataStepFour,
-        }
-      }
-
-    }
   },
   data() {
     return {
       step: 1,
-      dataStepOne: {},
-      dataStepTwo: {},
-      dataStepThree: {},
-      dataStepFour: {},
-      dataStepFive: {},
-      form: {}
     }
   },
-
   methods: {
     currentTitle() {
       switch (this.step) {
         case 1:
-          return "Sejam bem vindo(a)"
+          return "Seja bem vindo(a)"
         case 2:
           return "Pessoa física"
         case 3:
@@ -83,28 +67,28 @@ export default {
     next(dados) {
       switch (this.step) {
         case 1:
-          this.dataStepOne = dados
-          this.dataStepOne.registrationType === 'PF' ? this.step = 2 : this.step = 3
+          this.user.registrationType === 'PF' ? this.step = 2 : this.step = 3
           break
         case 2:
-          this.dataStepTwo = dados
           this.step = 4
           break
         case 3:
-          this.dataStepThree = dados
           this.step = 4
           break
         case 4:
-          this.dadosStepFour = dados
           this.step = 5
         case 5:
-          this.dadosStepFive = dados
           break
       }
     },
     back() {
-      if (this.dataStepOne.registrationType === 'PJ' && this.step === 3) {
+      if (this.user.registrationType === 'PJ' && this.step === 3) {
         this.step = 1
+        return
+      }
+
+      if (this.step === 4 && this.user.registrationType === 'PF') {
+        this.step = 2
         return
       }
 

@@ -1,13 +1,14 @@
 <template>
   <div class="form-radio">
     <label class="form-radio__label" v-for="(option, index) in options" :key="index">
-      <input class="form-radio__input" type="radio" :checked="modelValue === option.value" :name="name"
+      <input class="form-radio__input" type="radio" :checked="modelValue === option.value || option.default" :name="name"
         :value="option.value" @input="handleChange">
       {{ option.label }}
     </label>
-    <div v-if="error" class="form-error__text">
-      {{ error }}
-    </div>
+
+  </div>
+  <div v-if="error" class="form-error__text">
+    {{ error }}
   </div>
 </template>
 

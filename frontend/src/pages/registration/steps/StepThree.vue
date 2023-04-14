@@ -1,9 +1,13 @@
 <template>
     <InputText name="name" label="Nome" v-model="dados.name" :error="error.name" />
-    <InputText name="cnpj" label="CNPJ" mask="XX.XXX.XXX/XXXX-XX" v-model="dados.cnpj" :error="error.cnpj" />
-    <InputText name="openingDate" type="date" label="Data de abertura" v-model="dados.openingDate"
+
+    <InputText name="cnpj" label="CNPJ" mask="XX.XXX.XXX/XXXX-XX" v-model="dados.company.cnpj" :error="error.cnpj" />
+
+    <InputText name="openingDate" type="date" label="Data de abertura" v-model="dados.company.openingDate"
         :error="error.openingDate" />
+
     <InputText name="phone" mask="(XX) X XXXX.XXXX" label="Telefone" v-model="dados.phone" :error="error.phone" />
+
     <GroupButton>
         <Button label="Voltar" :outline="true" :half="true" @click.prevent="back" />
         <Button label="Continue" :half="true" @click.prevent="next" />
@@ -11,14 +15,13 @@
 </template>
   
 <script>
+import { validateCnpj, validateMinimumSize, } from "../../../utils/validate";
+
 import InputText from '../../../components/InputText.vue'
 import InputRadio from '../../../components/InputRadio.vue'
 import Button from '../../../components/Button.vue'
 import GroupButton from '../../../components/GroupButton.vue'
-import {
-    validateCnpj,
-    validateMinimumSize,
-} from "../../../utils/helperValidate";
+
 
 export default {
     components: {
@@ -32,10 +35,10 @@ export default {
         'dados.name'() {
             this.error.name = ''
         },
-        'dados.cnpj'() {
+        'dados.company.cnpj'() {
             this.error.cnpj = ''
         },
-        'dados.openingDate'() {
+        'dados.company.openingDate'() {
             this.error.openingDate = ''
         },
         'dados.phone'() {
@@ -44,13 +47,7 @@ export default {
     },
     data() {
         return {
-            step: 3,
-            error: {
-                name: '',
-                cnpj: '',
-                openingDate: '',
-                phone: '',
-            },
+            error: {},
         }
     },
     emits: ['next', 'back', 'dados'],
@@ -61,12 +58,12 @@ export default {
                 return
             }
 
-            if (!this.dados.cnpj || !!!validateCnpj(this.dados.cnpj)) {
+            if (!this.dados.company.cnpj || !!!validateCnpj(this.dados.company.cnpj)) {
                 this.error.cnpj = 'Informe um CNPJ válido'
                 return
             }
 
-            if (!this.dados.openingDate) {
+            if (!this.dados.company.openingDate) {
                 this.error.openingDate = 'Informe a data de abertura'
                 return
             }
