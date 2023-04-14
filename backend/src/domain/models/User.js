@@ -36,12 +36,6 @@ const userSchema = new Schema({
     required: true,
   },
   company: {
-    name: {
-      type: String,
-      required: function () {
-        return this.registrationType === "PJ";
-      },
-    },
     cnpj: {
       type: String,
       required: function () {
@@ -50,12 +44,6 @@ const userSchema = new Schema({
     },
     openingDate: {
       type: Date,
-      required: function () {
-        return this.registrationType === "PJ";
-      },
-    },
-    phone: {
-      type: String,
       required: function () {
         return this.registrationType === "PJ";
       },

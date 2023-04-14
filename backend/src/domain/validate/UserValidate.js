@@ -16,10 +16,6 @@ const UserValidate = joi.object({
   phone: joi.string().required(),
   company: joi
     .object({
-      name: joi.string().when("registrationType", {
-        is: "PJ",
-        then: joi.string().required(),
-      }),
       cnpj: joi.string().when("registrationType", {
         is: "PJ",
         then: joi.string().required(),
@@ -27,10 +23,6 @@ const UserValidate = joi.object({
       openingDate: joi.date().when("registrationType", {
         is: "PJ",
         then: joi.date().required(),
-      }),
-      phone: joi.string().when("registrationType", {
-        is: "PJ",
-        then: joi.string().required(),
       }),
     })
     .when("registrationType", {
