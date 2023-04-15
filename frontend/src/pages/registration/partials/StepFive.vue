@@ -19,7 +19,7 @@
             :error="error.openingDate" />
     </template>
     <InputText name="email" label="Sua Senha" v-model="form.password" :error="error.password" />
-
+    {{ this.loading }}
     <GroupButton>
         <ButtonComponent :disabled="loading" label="Voltar" :outline="true" :half="true" @click.prevent="back" />
         <ButtonComponent :disabled="loading" label="Cadastrar" :half="true" @click.prevent="submitForm" />
@@ -94,10 +94,12 @@ export default {
 
         submitForm() {
             try {
-                this.loading = true;
 
                 const valid = !!this.validateForm()
+
                 if (valid) {
+                    this.loading = true;
+
                     const form = {
                         email: this.form.email,
                         registrationType: this.form.registrationType,
@@ -124,12 +126,12 @@ export default {
                                 message: 'Usuário cadastrado com sucesso!',
                                 error: false
                             },
+                                this.loading = false;
 
-                                setTimeout(() => {
-                                    this.display.enable = false
-                                    this.loading = false;
+                            setTimeout(() => {
+                                this.display.enable = false
 
-                                }, 5000);
+                            }, 5000);
                         })
                         .catch((error) => {
 
@@ -138,11 +140,12 @@ export default {
                                 message: `Erro ao realizar novo cadastro:  ${error.response.data.message}`,
                                 error: true
                             },
+                                this.loading = false;
 
-                                setTimeout(() => {
-                                    this.display.enable = false;
-                                    this.loading = false;
-                                }, 5000);
+                            setTimeout(() => {
+                                this.display.enable = false;
+
+                            }, 5000);
                         })
                 }
             } catch (error) {
