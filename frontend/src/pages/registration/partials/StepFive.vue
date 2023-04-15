@@ -18,8 +18,9 @@
         <InputText name="openingDate" type="date" label="Data de abertura" v-model="form.company.openingDate"
             :error="error.openingDate" />
     </template>
+
     <InputText name="email" label="Sua Senha" v-model="form.password" :error="error.password" />
-    {{ this.loading }}
+
     <GroupButton>
         <ButtonComponent :disabled="loading" label="Voltar" :outline="true" :half="true" @click.prevent="back" />
         <ButtonComponent :disabled="loading" label="Cadastrar" :half="true" @click.prevent="submitForm" />
