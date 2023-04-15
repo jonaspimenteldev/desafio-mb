@@ -17,7 +17,6 @@ export const useRegistrationStore = defineStore('registration', {
     }
   }),
   actions: {
-    // since we rely on `this`, we cannot use an arrow function
     updateUser(payload) {
       this.$patch({
         user: Object.assign(this.$state.user, payload)
