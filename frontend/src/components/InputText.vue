@@ -2,23 +2,23 @@
   <div class="form-input">
     <label class="form-input__label" :for="label">{{ label }}</label>
     <template v-if="mask">
-      <input :placeholder="placeholder" :type="type" @blur="blur" :class="{ 'form-error__border': error }"
-        class="form-input__input " v-bind:value="modelValue" v-on:input="updateModel" v-mascara="mask" />
+      <input :id="id" :placeholder="placeholder" :type="type" @blur="blur" :class="{ 'form-error__border': error }"
+        class="form-input__input" v-bind:value="modelValue" v-on:input="updateModel" v-mascara="mask" />
     </template>
     <template v-else>
-      <input :placeholder="placeholder" :type="type" @blur="blur" :class="{ 'form-error__border': error }"
-        class="form-input__input " v-bind:value="modelValue" v-on:input="updateModel" />
+      <input :id="id" :placeholder="placeholder" :type="type" @blur="blur" :class="{ 'form-error__border': error }"
+        class="form-input__input" v-bind:value="modelValue" v-on:input="updateModel" />
     </template>
     <div v-if="error" class="form-error__text">
       {{ error }}
     </div>
   </div>
 </template>
-  
+
 <script>
 export default {
-  name: "InputText",
-  props: ["modelValue", 'mask', 'label', 'name', 'error', 'placeholder', 'type'],
+  name: 'InputText',
+  props: ['modelValue', 'mask', 'label', 'name', 'error', 'placeholder', 'type', 'id'],
   emits: ['blur', 'update:modelValue'],
   methods: {
     blur() {
@@ -27,7 +27,7 @@ export default {
     updateModel($event) {
       this.$emit('update:modelValue', $event.target.value)
     }
-  },
+  }
 }
 </script>
 

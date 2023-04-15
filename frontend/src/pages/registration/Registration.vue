@@ -1,107 +1,106 @@
 <template>
-  <!-- <pre>  {{ steps }}</pre> -->
   <div class="container">
     <form class="form">
-      <Header :currentStep="currentStep" :title="currentTitle()" />
-      <StepOne v-if="step === 1" :dados="user" @next="next" />
-      <StepTwo v-if="step === 2" :dados="user" @next="next" @back="back" />
-      <StepThree v-if="step === 3" :dados="user" @next="next" @back="back" />
-      <StepFour v-if="step === 4" :dados="user" @next="next" @back="back" />
-      <Resume v-if="step === 5" :dados="user" @back="back" />
+      <HeaderComponent :currentStep="currentStep" :title="currentTitle" />
+      <Component v-if="step in this.stepsConfig" :is="stepsConfig[step].component" :dados="user" @next="next"
+        @back="back" />
     </form>
   </div>
 </template>
 <script>
-import { mapState, mapWritableState } from 'pinia'
-import { useRegistrationStore } from '../../store/registration'
+import { mapState, mapActions } from 'pinia'
+import { useRegistrationStore } from '@/stores/registration'
 
 /* Components */
-import Header from '../../components/Header.vue'
-import StepOne from './steps/StepOne.vue'
-import StepTwo from './steps/StepTwo.vue'
-import StepThree from './steps/StepThree.vue'
-import StepFour from './steps/StepFour.vue'
-import Resume from './steps/StepFive.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import StepOne from './partials/StepOne.vue'
+import StepTwo from './partials/StepTwo.vue'
+import StepThree from './partials/StepThree.vue'
+import StepFour from './partials/StepFour.vue'
+import Resume from './partials/StepFive.vue'
+
 
 export default {
+  emits: ['back', 'next'],
   components: {
-    Header,
+    HeaderComponent,
     StepOne,
     StepTwo,
     StepThree,
     StepFour,
-    Resume,
+    Resume
   },
   computed: {
-    ...mapState(useRegistrationStore, ['steps']),
-
-    ...mapWritableState(useRegistrationStore, ['user']),
+    ...mapState(useRegistrationStore, ['steps', 'user']),
 
     currentStep() {
-      if (this.step === 2 || this.step === 3) return 2
-      if (this.step === 4) return 3
-      if (this.step === 5) return 4
-      if (this.step) return this.step
+      const currentStepConfig = this.stepsConfig[this.step];
+      return currentStepConfig.currentStep || this.step;
+    },
+
+    currentTitle() {
+      const currentStepConfig = this.stepsConfig[this.step];
+      return currentStepConfig.title || '';
     },
   },
+
   data() {
     return {
       step: 1,
+      stepsConfig: {
+        1: {
+          currentStep: 1,
+          component: 'StepOne',
+          title: 'Seja bem-vindo(a)',
+          nextStep: (user) => (user.registrationType === 'PF' ? 2 : 3)
+        },
+        2: {
+          currentStep: 2,
+          component: 'StepTwo',
+          title: 'Pessoa física',
+          nextStep: () => 4
+        },
+        3: {
+          currentStep: 2,
+          component: 'StepThree',
+          title: 'Pessoa jurídica',
+          nextStep: () => 4
+        },
+        4: {
+          currentStep: 3,
+          component: 'StepFour',
+          title: 'Senha de acesso',
+          nextStep: () => 5
+        },
+        5: {
+          currentStep: 4,
+          component: 'Resume',
+          title: 'Revise suas informações',
+        }
+      }
     }
   },
+
   methods: {
-    currentTitle() {
-      switch (this.step) {
-        case 1:
-          return "Seja bem vindo(a)"
-        case 2:
-          return "Pessoa física"
-        case 3:
-          return "Pessoa jurídica"
-        case 4:
-          return "Senha de acesso"
-        case 5:
-          return "Revise suas informações"
+    ...mapActions(useRegistrationStore, ['updateUser']),
+
+    next(form) {
+      this.updateUser(form);
+      const currentStepConfig = this.stepsConfig[this.step];
+      if (currentStepConfig.nextStep) {
+        this.step = currentStepConfig.nextStep(this.user);
       }
     },
-    next(dados) {
-      switch (this.step) {
-        case 1:
-          this.user.registrationType === 'PF' ? this.step = 2 : this.step = 3
-          break
-        case 2:
-          this.step = 4
-          break
-        case 3:
-          this.step = 4
-          break
-        case 4:
-          this.step = 5
-        case 5:
-          break
-      }
-    },
+
     back() {
       if (this.user.registrationType === 'PJ' && this.step === 3) {
         this.step = 1
-        return
-      }
-
-      if (this.step === 4 && this.user.registrationType === 'PF') {
+      } else if (this.step === 4 && this.user.registrationType === 'PF') {
         this.step = 2
-        return
-      }
-
-      this.step -= 1
-    },
-    submit() {
-      this.form = {
-        ...this.dataStepOne,
-        ...this.dataStepTwo
+      } else {
+        this.step -= 1
       }
     }
   }
 }
 </script>
-  
-<style lang="scss"></style>

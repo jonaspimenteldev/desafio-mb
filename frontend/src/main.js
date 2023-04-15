@@ -1,19 +1,24 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import App from "./App.vue";
-import axios from "axios";
-import mascaraDiretiva from "./utils/diretiva";
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
-import "./assets/scss/base.scss";
+import App from './App.vue'
+import router from './router'
 
-const pinia = createPinia();
+import axios from '../src/http/axios'
 
-const app = createApp(App);
+import mascaraDiretiva from './utils/diretiva'
 
-app.use(pinia);
+import './assets/scss/base.scss'
 
-mascaraDiretiva(app);
+const pinia = createPinia()
 
-app.config.globalProperties.$axios = axios;
+const app = createApp(App)
 
-app.mount("#app");
+mascaraDiretiva(app)
+
+app.config.globalProperties.$axios = axios
+
+app.use(pinia)
+app.use(router)
+
+app.mount('#app')

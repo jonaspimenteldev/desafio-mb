@@ -6,44 +6,43 @@
 }
 
 .form-radio__input:before {
-    background-color: white;
-    content: "";
-    position: absolute;
-    left: 0;
-    transform: translate(-22%, -21%);
-    width: 18px;
-    height: 18px;
-    border: 2px solid #555;
-    border-radius: 50%;
-    display: flex;
+  background-color: white;
+  content: '';
+  position: absolute;
+  left: 0;
+  transform: translate(-22%, -21%);
+  width: 18px;
+  height: 18px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  display: flex;
 }
 
-
 .form-radio__input:after {
-    background-color: white;
-    content: "";
-    position: absolute;
-    left: 0;
-    transform: translate(-5%, -5%);
-    width: 10px;
-    height: 10px;
-    border: 2px solid #555;
-    border-radius: 50%;
-    display: flex;
+  background-color: white;
+  content: '';
+  position: absolute;
+  left: 0;
+  transform: translate(-5%, -5%);
+  width: 10px;
+  height: 10px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  display: flex;
 }
 
 .form-radio__input:checked:after {
-    background-color: var(--color-primary);
-    
-    content: "";
-    position: absolute;
-    left: 0;
-    transform: translate(-5%, -5%);
-    width: 10px;
-    height: 10px;
-    border: 2px solid #555;
-    border-radius: 50%;
-    display: flex;
+  background-color: var(--color-primary);
+
+  content: '';
+  position: absolute;
+  left: 0;
+  transform: translate(-5%, -5%);
+  width: 10px;
+  height: 10px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  display: flex;
 }
 
 .form-radio__input label {

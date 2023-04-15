@@ -1,5 +1,5 @@
 <template>
-    <div class="form-columns">
-        <slot></slot>
-    </div>
+  <div class="form-columns">
+    <slot></slot>
+  </div>
 </template>

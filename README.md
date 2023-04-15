@@ -43,6 +43,8 @@ http://localhost:3000/api-docs/
 ```js
 npm i
 npm run dev
+
+npm run test:unit
 ```
 
 **Utilizei o Vue 3 com Options API, Pinia e Vite**
@@ -50,9 +52,5 @@ npm run dev
 ---
 No **frontend** procurei explorar as propriedades, conceitos, estado global, diretivas, validação de dados, mixins e a criação de novos componentes.
 
-<br/>
-Não utilizei Vue Router, pois não foi necessário para esse projeto específico.
 
-<br/>
-
-**Não foi solicitado testes, mas utilizo habitualmente Jest (unitários) e Cypress para testes de interface**
+**Utilizei o Jest somente para teste unitário de componente**

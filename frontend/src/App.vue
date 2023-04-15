@@ -1,16 +1,7 @@
-<template>
-  <Registration />
-</template>
-
-<script>
-import Registration from './pages/registration/Registration.vue'
-  export default {
-    components: {
-      Registration,
-    },
-  }
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<template>
+  <RouterView />
+</template>
