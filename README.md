@@ -1,4 +1,4 @@
-# Desafio Mercado Bitcoin
+# Desafio MB
 
 Organizei o projeto em duas pastas
 <br />
