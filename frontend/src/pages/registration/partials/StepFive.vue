@@ -129,7 +129,7 @@ export default {
                                     this.display.enable = false
                                     this.loading = false;
 
-                                }, 8000);
+                                }, 5000);
                         })
                         .catch((error) => {
 
@@ -142,12 +142,12 @@ export default {
                                 setTimeout(() => {
                                     this.display.enable = false;
                                     this.loading = false;
-                                }, 8000);
+                                }, 5000);
                         })
                 }
             } catch (error) {
                 console.log(error)
-
+                this.loading = false;
 
             }
         }
